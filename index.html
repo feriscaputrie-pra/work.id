@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>work.id — Lowongan Kerja Pacitan & Sekitarnya</title>
+<meta name="description" content="Portal pencarian kerja di Kabupaten Pacitan dan sekitarnya. Proyek mata kuliah Sistem Informasi.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="logo"><span class="logo-dot" data-ic="briefcase" data-s="18"></span><span class="lt">work<span>.id</span></span></a>
+    <nav class="menu" id="menu">
+      <a href="#kategori">Kategori</a>
+      <a href="#lowongan">Lowongan</a>
+      <a href="#pasang">Pasang Lowongan</a>
+      <a href="#sistem">Tentang Sistem</a>
+    </nav>
+    <button class="btn-saved" id="openSaved"><i data-ic="bookmark" data-s="14"></i> Tersimpan <b id="savedCount">0</b></button>
+    <button class="burger" id="burger" aria-label="Menu"><i data-ic="bars" data-s="18"></i></button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div class="hero-text">
+        <span class="pill"><i data-ic="pin" data-s="13"></i> Kab. Pacitan · Ponorogo · Trenggalek · Wonogiri</span>
+        <h1>Temukan kerja <em>dekat rumah</em>, mulai dari Bumi Pacitan.</h1>
+        <p>work.id mempertemukan pencari kerja dengan pemberi kerja di Kabupaten Pacitan dan daerah sekitarnya.</p>
+        <form class="search" id="searchForm">
+          <label class="field"><span data-ic="search" data-s="16"></span>
+            <input id="q" type="search" placeholder="Posisi, perusahaan, atau kata kunci…" autocomplete="off">
+          </label>
+          <label class="field"><span data-ic="pin" data-s="16"></span>
+            <select id="loc"></select>
+          </label>
+          <button class="btn-primary" type="submit">Cari</button>
+        </form>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="blob b1" data-ic="wisata" data-s="48"></div><div class="blob b2" data-ic="tani" data-s="42"></div><div class="blob b3" data-ic="it" data-s="46"></div><div class="blob b4" data-ic="dagang" data-s="50"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap stats" id="stats"></section>
+
+  <section class="wrap" id="kategori">
+    <div class="sec-head">
+      <h2>Jelajahi berdasarkan kategori</h2>
+      <p>Klik ikon untuk menyaring lowongan sesuai bidang.</p>
+    </div>
+    <div class="cats" id="cats"></div>
+  </section>
+
+  <section class="wrap" id="lowongan">
+    <div class="sec-head row">
+      <div><h2>Lowongan terbaru</h2><p id="resultInfo"></p></div>
+      <div class="filters">
+        <select id="area"></select>
+        <select id="type">
+          <option value="">Semua tipe</option><option>Full-time</option><option>Part-time</option><option>Magang</option><option>Freelance</option>
+        </select>
+        <select id="sort">
+          <option value="new">Terbaru</option><option value="salary">Gaji tertinggi</option><option value="az">Judul A–Z</option>
+        </select>
+        <button class="btn-ghost" id="reset">Reset</button>
+      </div>
+    </div>
+    <div class="jobs" id="jobs"></div>
+    <div class="empty" id="empty" hidden>
+      <div class="empty-ic" data-ic="search" data-s="40"></div><h3>Belum ada lowongan yang cocok</h3><p>Coba ubah kata kunci, lokasi, atau kategori.</p>
+    </div>
+  </section>
+
+  <section class="wrap" id="resmi">
+    <div class="sec-head"><h2>Cari lowongan resmi</h2><p>Untuk lowongan sungguhan, cek juga sumber resmi berikut.</p></div>
+    <div class="sys">
+      <a class="card-s link" style="background:var(--mint)" href="https://karirhub.kemnaker.go.id" target="_blank" rel="noopener"><div class="ic" data-ic="landmark" data-s="22"></div><h3>Karirhub Kemnaker</h3><p>Portal lowongan resmi Kementerian Ketenagakerjaan.</p></a>
+      <div class="card-s" style="background:var(--lemon)"><div class="ic" data-ic="building" data-s="22"></div><h3>Disnaker Kab. Pacitan</h3><p>Tanyakan info bursa kerja dan job fair di kantor dinas setempat.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap" id="pasang">
+    <div class="sec-head"><h2>Pasang lowongan</h2><p>Untuk pemberi kerja (UMKM, hotel, sekolah, dll). Data disimpan di browser sebagai simulasi database.</p></div>
+    <form class="post" id="postForm">
+      <label>Judul posisi<input name="title" required maxlength="60" placeholder="mis. Admin Toko"></label>
+      <label>Nama perusahaan<input name="company" required maxlength="50" placeholder="mis. Toko Sumber Rejeki"></label>
+      <label>Kategori<select name="cat" id="postCat" required></select></label>
+      <label>Kabupaten<select name="loc" id="postLoc" required></select></label>
+      <label>Kecamatan<select name="area" id="postArea"></select></label>
+      <label>Tipe<select name="type"><option>Full-time</option><option>Part-time</option><option>Magang</option><option>Freelance</option></select></label>
+      <label>Gaji per bulan (Rp)<input name="salary" type="number" min="0" step="50000" placeholder="2000000"></label>
+      <label class="full">Deskripsi & persyaratan<textarea name="desc" rows="3" required maxlength="400" placeholder="Tugas utama dan kualifikasi…"></textarea></label>
+      <label class="full">Kontak (WhatsApp / email)<input name="contact" required placeholder="08xxxxxxxxxx"></label>
+      <button class="btn-primary full" type="submit">Terbitkan lowongan</button>
+    </form>
+  </section>
+
+  <section class="wrap" id="sistem">
+    <div class="sec-head"><h2>Tentang sistem</h2><p>Gambaran singkat rancangan sistem informasi work.id.</p></div>
+    <div class="sys">
+      <article class="card-s"><div class="ic" data-ic="user" data-s="22"></div><h3>Pencari kerja</h3><p>Mencari, menyaring, menyimpan, dan melihat detail lowongan.</p></article>
+      <article class="card-s"><div class="ic" data-ic="building" data-s="22"></div><h3>Pemberi kerja</h3><p>Mengisi formulir dan menerbitkan lowongan ke daftar.</p></article>
+      <article class="card-s"><div class="ic" data-ic="db" data-s="22"></div><h3>Basis data</h3><p>Entitas: <b>Kategori</b>, <b>Lokasi</b>, <b>Perusahaan</b>, <b>Lowongan</b>, <b>Tersimpan</b>.</p></article>
+      <article class="card-s"><div class="ic" data-ic="gear" data-s="22"></div><h3>Proses</h3><p>Input → validasi → simpan → filter & urut → tampil.</p></article>
+    </div>
+    <div class="flow">
+      <span>Input pemberi kerja</span>→<span>Validasi form</span>→<span>Simpan (localStorage)</span>→<span>Filter & sort</span>→<span>Tampil ke pencari kerja</span>
+    </div>
+    <p class="note"><i data-ic="info" data-s="14"></i> Data lowongan awal adalah <b>data contoh (fiktif)</b>, nama usaha dan kontak bukan data nyata, untuk keperluan demonstrasi tugas kuliah.</p>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <b>work.id</b> — Proyek Tugas Mata Kuliah Sistem Informasi · Pacitan, Jawa Timur
+  </div>
+</footer>
+
+<!-- Modal detail -->
+<div class="modal" id="modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true">
+    <button class="x" id="closeModal" aria-label="Tutup" data-ic="x" data-s="14"></button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<!-- Panel tersimpan -->
+<aside class="drawer" id="drawer" hidden>
+  <div class="drawer-box">
+    <div class="drawer-head"><h3>Lowongan tersimpan</h3><button class="x" id="closeDrawer" aria-label="Tutup" data-ic="x" data-s="14"></button></div>
+    <div id="savedList"></div>
+  </div>
+</aside>
+
+<div class="toast" id="toast" hidden></div>
+<script src="icons.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
